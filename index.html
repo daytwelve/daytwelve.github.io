@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>研究成果</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 20% 30%, #0b0f1a, #03050b);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      color: #d0e0ff;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #5f9fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #b0d0ff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 150px, #7bb2ff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 150px 40px, #4a7fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 200px 200px, #9fc0ff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 300px 100px, #3a6eff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 400px 300px, #8cb0ff, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 500px 500px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+      animation: starDrift 60s linear infinite;
+    }
+
+    @keyframes starDrift {
+      0% { background-position: 0 0; }
+      100% { background-position: 500px 500px; }
+    }
+
+    .app {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(8, 15, 30, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(80, 150, 255, 0.3);
+      box-shadow: 0 0 40px rgba(0, 80, 255, 0.2), inset 0 0 30px rgba(0, 60, 200, 0.1);
+      border-radius: 2.5rem;
+      padding: 3rem 2.5rem;
+      position: relative;
+      z-index: 2;
+      animation: appEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes appEntry {
+      0% { opacity: 0; transform: translateY(30px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .app::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 2.7rem;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(0,150,255,0.5), rgba(100,0,255,0.3), rgba(0,150,255,0.5));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.6;
+      animation: borderGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes borderGlow {
+      0% { opacity: 0.4; }
+      100% { opacity: 0.9; }
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #a0c8ff, #6ea8ff, #b8d4ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(70, 140, 255, 0.7);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+      text-align: center;
+      animation: titleIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    @keyframes titleIn {
+      0% { opacity: 0; transform: translateY(20px); filter: blur(8px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #b6d0ff, #7fa9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 15px rgba(60, 120, 255, 0.5);
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+      text-align: left;
+      animation: titleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .btn {
+      display: inline-block;
+      background: rgba(20, 40, 80, 0.7);
+      border: 1px solid #3a7eff;
+      color: #cce4ff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 1rem 2.5rem;
+      margin: 1rem 0.5rem 1rem 0;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 15px rgba(50, 130, 255, 0.3), inset 0 0 8px rgba(0, 100, 255, 0.2);
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(100, 180, 255, 0.4), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .btn:hover {
+      background: rgba(30, 70, 130, 0.9);
+      border-color: #6ea8ff;
+      box-shadow: 0 0 30px rgba(70, 150, 255, 0.7), inset 0 0 12px rgba(100, 180, 255, 0.4);
+      color: #ffffff;
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:active {
+      transform: scale(0.96) translateY(0);
+      box-shadow: 0 0 20px rgba(50, 130, 255, 0.9);
+      transition: all 0.1s ease;
+    }
+
+    .btn-secondary {
+      background: rgba(10, 20, 40, 0.8);
+      border: 1px solid #2a5a9a;
+      color: #a0c0f0;
+      box-shadow: 0 0 10px rgba(30, 80, 180, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(20, 50, 90, 0.9);
+      border-color: #4a8eff;
+      box-shadow: 0 0 25px rgba(50, 130, 255, 0.5);
+    }
+
+    .report-content {
+      background: rgba(2, 8, 20, 0.7);
+      border: 1px solid rgba(70, 140, 255, 0.4);
+      border-radius: 2rem;
+      padding: 2rem 1.8rem;
+      margin: 1.8rem 0;
+      box-shadow: inset 0 0 30px rgba(0, 40, 100, 0.5), 0 10px 20px -10px rgba(0,0,0,0.8);
+      backdrop-filter: blur(4px);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #b8d0ff;
+      text-shadow: 0 0 5px rgba(0, 80, 200, 0.3);
+      max-height: 500px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #2a5a9a #0a1428;
+      animation: reportIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes reportIn {
+      0% { opacity: 0; transform: translateY(-30px) scale(0.94); filter: blur(8px); }
+      60% { opacity: 1; filter: blur(2px); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+
+    .report-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .report-content::-webkit-scrollbar-track {
+      background: #0a1428;
+      border-radius: 20px;
+    }
+
+    .report-content::-webkit-scrollbar-thumb {
+      background: #2a5a9a;
+      border-radius: 20px;
+      box-shadow: 0 0 10px #3a7eff;
+    }
+
+    .report-content p {
+      margin-bottom: 1.2rem;
+      animation: paraIn 0.6s ease both;
+    }
+
+    .report-content p:nth-child(1) { animation-delay: 0.25s; }
+    .report-content p:nth-child(2) { animation-delay: 0.45s; }
+    .report-content p:nth-child(3) { animation-delay: 0.65s; }
+
+    @keyframes paraIn {
+      0% { opacity: 0; transform: translateX(-10px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .report-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      animation: pageIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes pageIn {
+      0% { opacity: 0; transform: translateX(60px) scale(0.97); filter: blur(6px); }
+      100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .app {
+        padding: 2rem 1.5rem;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 1.7rem;
+      }
+      .btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+      .button-group {
+        flex-direction: column;
+      }
+      .report-content {
+        padding: 1.5rem 1.2rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+    <div id="homePage" class="page">
+      <h1>最新研究成果</h1>
+      <div style="display: flex; justify-content: center;">
+        <button id="gotoResearchBtn" class="btn">查看我们的研究成果</button>
+      </div>
+    </div>
+
+    <div id="researchPage" class="page hidden">
+      <h2>鞋底购买选择与市场经济之间的关联</h2>
+      
+      <div id="reportBtnWrapper" style="margin-bottom: 0.5rem;">
+        <button id="showReportBtn" class="btn">查看成果报告</button>
+      </div>
+
+      <div id="reportContent" class="report-content hidden">
+        <p>由于你的不认真，导致鞋底开胶，造成多人连环追尾并在追尾状态下闯过52个红灯，共用时729秒。导致多人驾照被吊销。直接导致股票大跌并导致螺丝钉生锈莫氏硬度降低，战斗机食用资格证失效或被吊销。故应当在买鞋时注意鞋底是否藏有蜗牛并对你的胳膊进行清理。</p>
+        <p>你需要注意的是笔记本电脑并非光盘，因此其并不能作为薯片原材料用于视频发射。若强行尝试会造成旱茶甜度过高，食用后歇业委会被撤职。因此必须早晨硬用防毒面具炒饭，然后加入打印机光片，这样才能正确吃到垃圾桶里的渗沥液。若不能正常运转，则应当购买比特币并确保其变成巧克力奶，这样才能让抹茶变成耗材。</p>
+        <p>天津市应当保持河北省的执政骨干净化器正常运行，这样才能使得遥控器上的星星不会被你的臭脚丫子变成有机物，导致冰箱冷冻层发生大暴雨，生成撒哈拉沙漠。</p>
+      </div>
+
+      <div id="collapseWrapper" class="hidden" style="margin-top: 0.5rem;">
+        <button id="collapseBtn" class="btn btn-secondary">收起</button>
+      </div>
+
+      <div style="margin-top: 2rem; border-top: 1px solid rgba(70, 140, 255, 0.3); padding-top: 1.8rem;">
+        <button id="backHomeBtn" class="btn btn-secondary">← 返回首页</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const homePage = document.getElementById('homePage');
+      const researchPage = document.getElementById('researchPage');
+      
+      const gotoResearchBtn = document.getElementById('gotoResearchBtn');
+      const backHomeBtn = document.getElementById('backHomeBtn');
+      
+      const showReportBtn = document.getElementById('showReportBtn');
+      const reportBtnWrapper = document.getElementById('reportBtnWrapper');
+      const reportContent = document.getElementById('reportContent');
+      const collapseWrapper = document.getElementById('collapseWrapper');
+      const collapseBtn = document.getElementById('collapseBtn');
+
+      function showHome() {
+        homePage.classList.remove('hidden');
+        researchPage.classList.add('hidden');
+        resetResearchState();
+      }
+
+      function showResearch() {
+        homePage.classList.add('hidden');
+        researchPage.classList.remove('hidden');
+        resetResearchState();
+      }
+
+      function resetResearchState() {
+        reportContent.classList.add('hidden');
+        reportBtnWrapper.classList.remove('hidden');
+        collapseWrapper.classList.add('hidden');
+        showReportBtn.classList.remove('hidden');
+      }
+
+      gotoResearchBtn.addEventListener('click', showResearch);
+      backHomeBtn.addEventListener('click', showHome);
+
+      showReportBtn.addEventListener('click', function() {
+        reportContent.classList.remove('hidden');
+        reportBtnWrapper.classList.add('hidden');
+        collapseWrapper.classList.remove('hidden');
+      });
+
+      collapseBtn.addEventListener('click', function() {
+        reportContent.classList.add('hidden');
+        collapseWrapper.classList.add('hidden');
+        reportBtnWrapper.classList.remove('hidden');
+      });
+    })();
+  </script>
+</body>
+</html>
